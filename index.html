@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="pt-BR" class="intro-on">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Leonardo Augusto · Audio Engineer</title>
+<meta name="description" content="Leonardo Augusto, engenheiro de áudio. FOH e Live Streaming na Cidade Imafé, live mix, shows e gravação ao vivo.">
+<meta property="og:title" content="Leonardo Augusto · Audio Engineer">
+<meta property="og:description" content="FOH | Live Streaming. Mix ao vivo pra quem tá na nave e pra quem assiste de casa.">
+<meta property="og:image" content="img/foh-igreja.jpg">
+<meta name="theme-color" content="#07070a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%2307070a%22/%3E%3Crect x=%227%22 y=%2214%22 width=%224%22 height=%2212%22 fill=%22%233ee08f%22/%3E%3Crect x=%2214%22 y=%228%22 width=%224%22 height=%2218%22 fill=%22%23b48cff%22/%3E%3Crect x=%2221%22 y=%2218%22 width=%224%22 height=%228%22 fill=%22%233ee08f%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=1">
+<script>
+  try { if (sessionStorage.getItem('la-intro') && !location.search.includes('intro')) document.documentElement.classList.remove('intro-on'); } catch (e) {}
+</script>
+</head>
+<body>
+
+<!-- INTRO: line check -->
+<div class="lc" id="lc" aria-hidden="true">
+  <div class="lc__top mono"><span>LINE CHECK</span><span class="lc__ch">CH 01</span></div>
+  <div class="lc__meters" id="lcMeters"></div>
+  <div class="lc__count mono" id="lcCount">um, dois</div>
+  <div class="lc__name">
+    <span class="lc__word">Leonardo</span>
+    <span class="lc__word">Augusto</span>
+  </div>
+  <div class="lc__fader"><span class="lc__cap" id="lcCap"></span></div>
+  <button class="lc__skip mono" id="lcSkip" type="button">pular ›</button>
+</div>
+
+<header class="hd" id="hd">
+  <a class="hd__brand" href="#topo" aria-label="Leonardo Augusto, início">
+    <span class="hd__dot"></span>
+    <span class="hd__name">Leonardo Augusto</span>
+    <span class="hd__tag mono">FOH · STREAM</span>
+  </a>
+  <nav class="hd__nav" id="nav">
+    <a href="#mesa">A mesa</a>
+    <a href="#fluxo">Fluxo de sinal</a>
+    <a href="#rack">Rack</a>
+    <a href="#onde">Onde soou</a>
+    <a class="hd__cta" href="#contato">Chamar o Léo</a>
+  </nav>
+  <button class="hd__burger" id="burger" type="button" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span></button>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="topo">
+  <div class="hero__stage" id="heroStage">
+    <div class="hero__cols">
+      <figure class="hero__col"><video muted playsinline loop preload="auto" poster="video/loop-reino.jpg" data-src="video/loop-reino.mp4"></video></figure>
+      <figure class="hero__col"><video muted playsinline loop preload="auto" poster="video/loop-culto.jpg" data-src="video/loop-culto.mp4"></video></figure>
+      <figure class="hero__col"><video muted playsinline loop preload="auto" poster="video/loop-circo.jpg" data-src="video/loop-circo.mp4"></video></figure>
+    </div>
+    <div class="hero__shade"></div>
+  </div>
+
+  <div class="hero__hud mono">
+    <span class="rec"><i></i> LIVE</span>
+    <span>FOH | LIVE STREAMING</span>
+    <span class="hero__tc" id="tc">00:00:00:00</span>
+  </div>
+
+  <div class="hero__copy">
+    <p class="hero__kicker mono">Audio Engineer | 96's</p>
+    <h1 class="hero__title">
+      <span class="ln"><span>Leonardo</span></span>
+      <span class="ln"><span>Augusto</span></span>
+    </h1>
+    <p class="hero__lead">Mix ao vivo pra quem tá na nave e pra quem assiste de casa. FOH e Live Streaming na Cidade Imafé.</p>
+    <div class="hero__ctas">
+      <a class="btn btn--solid" href="#contato">Pedir um orçamento</a>
+      <a class="btn btn--ghost" href="#mesa">Ouvir a mix</a>
+    </div>
+  </div>
+
+  <div class="hero__spl mono" aria-label="Nível sonoro">
+    <span class="hero__spl-l">SPL · LAeq</span>
+    <span class="hero__spl-v"><b id="spl">89.4</b> dB</span>
+  </div>
+
+  <canvas class="hero__rta" id="rta" aria-hidden="true"></canvas>
+  <div class="hero__scroll mono"><span>role pra subir o fader</span><i></i></div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="mani" id="mani">
+  <div class="mani__pin">
+    <div class="mani__meter" aria-hidden="true"><div class="mani__leds" id="maniLeds"></div><span class="mono">dBFS</span></div>
+    <p class="mani__text" id="maniText">Quem tá no culto não pensa no som. Pensa na palavra, na música, no momento. O trabalho de quem tá na mesa é fazer tudo isso chegar inteiro, da primeira fila até a galeria, e até a tela de quem assiste de casa.</p>
+  </div>
+</section>
+
+<!-- MESA INTERATIVA -->
+<section class="mesa" id="mesa">
+  <div class="sec-head">
+    <p class="eyebrow mono">01 · A mesa</p>
+    <h2 class="h2">A mesa é sua.<br><em>Sobe o fader.</em></h2>
+    <p class="sec-lead">Quatro canais, quatro momentos que o Léo mixou ao vivo. Sobe o fader pra ouvir, aperta <b class="mono">SOLO</b> pra ficar só com um.</p>
+  </div>
+
+  <div class="console" id="console">
+    <div class="console__bar mono">
+      <span>WING · SCENE 01</span>
+      <span class="console__hint" id="mesaHint">toque num fader pra ligar o som</span>
+      <span>MAIN L/R</span>
+    </div>
+    <div class="console__strips" id="strips">
+
+      <article class="strip" data-ch="1" style="--ch:#b48cff">
+        <div class="strip__lcd mono"><span>CH 01</span><b>REINO</b></div>
+        <div class="strip__screen"><video muted playsinline loop preload="none" poster="video/ch-reino.jpg" data-src="video/ch-reino.mp4"></video><span class="strip__live mono">● ON AIR</span></div>
+        <div class="strip__body">
+          <div class="strip__meter"><canvas width="14" height="200"></canvas></div>
+          <div class="strip__fader"><input type="range" min="0" max="100" value="0" aria-label="Fader do canal 1, Teu reino vem"><span class="strip__db mono">-∞</span></div>
+        </div>
+        <div class="strip__btns"><button class="b-mute mono" type="button" aria-pressed="false">MUTE</button><button class="b-solo mono" type="button" aria-pressed="false">SOLO</button></div>
+        <p class="strip__cap"><b>Teu reino vem</b> Um trecho do que rolou no aniversário da Cidade Imafé.</p>
+      </article>
+
+      <article class="strip" data-ch="2" style="--ch:#ffb547">
+        <div class="strip__lcd mono"><span>CH 02</span><b>CULTO</b></div>
+        <div class="strip__screen"><video muted playsinline loop preload="none" poster="video/ch-culto.jpg" data-src="video/ch-culto.mp4"></video><span class="strip__live mono">● ON AIR</span></div>
+        <div class="strip__body">
+          <div class="strip__meter"><canvas width="14" height="200"></canvas></div>
+          <div class="strip__fader"><input type="range" min="0" max="100" value="0" aria-label="Fader do canal 2, culto especial"><span class="strip__db mono">-∞</span></div>
+        </div>
+        <div class="strip__btns"><button class="b-mute mono" type="button" aria-pressed="false">MUTE</button><button class="b-solo mono" type="button" aria-pressed="false">SOLO</button></div>
+        <p class="strip__cap"><b>Culto especial</b> Mix de um culto na Cidade Imafé com a Juliane Nogueira.</p>
+      </article>
+
+      <article class="strip" data-ch="3" style="--ch:#ff5b8a">
+        <div class="strip__lcd mono"><span>CH 03</span><b>SEJALUZ</b></div>
+        <div class="strip__screen"><video muted playsinline loop preload="none" poster="video/ch-circo.jpg" data-src="video/ch-circo.mp4"></video><span class="strip__live mono">● ON AIR</span></div>
+        <div class="strip__body">
+          <div class="strip__meter"><canvas width="14" height="200"></canvas></div>
+          <div class="strip__fader"><input type="range" min="0" max="100" value="0" aria-label="Fader do canal 3, Sejaluz"><span class="strip__db mono">-∞</span></div>
+        </div>
+        <div class="strip__btns"><button class="b-mute mono" type="button" aria-pressed="false">MUTE</button><button class="b-solo mono" type="button" aria-pressed="false">SOLO</button></div>
+        <p class="strip__cap"><b>Live mix no Sejaluz</b> Um pouco do que rola nesse espetáculo incrível.</p>
+      </article>
+
+      <article class="strip" data-ch="4" style="--ch:#3fd0ff">
+        <div class="strip__lcd mono"><span>CH 04</span><b>DA MESA</b></div>
+        <div class="strip__screen"><video muted playsinline loop preload="none" poster="video/ch-mesa.jpg" data-src="video/ch-mesa.mp4"></video><span class="strip__live mono">● ON AIR</span></div>
+        <div class="strip__body">
+          <div class="strip__meter"><canvas width="14" height="200"></canvas></div>
+          <div class="strip__fader"><input type="range" min="0" max="100" value="0" aria-label="Fader do canal 4, vista da mesa"><span class="strip__db mono">-∞</span></div>
+        </div>
+        <div class="strip__btns"><button class="b-mute mono" type="button" aria-pressed="false">MUTE</button><button class="b-solo mono" type="button" aria-pressed="false">SOLO</button></div>
+        <p class="strip__cap"><b>Vista da mesa</b> O palco lá na frente e o Wing aberto no tablet.</p>
+      </article>
+
+      <article class="strip strip--main">
+        <div class="strip__lcd mono"><span>MAIN</span><b>L / R</b></div>
+        <div class="strip__body">
+          <div class="strip__meter strip__meter--st"><canvas width="14" height="200"></canvas><canvas width="14" height="200"></canvas></div>
+          <div class="strip__fader"><input type="range" min="0" max="100" value="78" id="mainFader" aria-label="Fader master"><span class="strip__db mono" id="mainDb">0.0</span></div>
+        </div>
+        <div class="strip__btns"><button class="b-mute mono" type="button" id="allOff">ZERAR</button></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- FLUXO DE SINAL -->
+<section class="fluxo" id="fluxo">
+  <div class="sec-head">
+    <p class="eyebrow mono">02 · Fluxo de sinal</p>
+    <h2 class="h2">Do palco<br><em>até você.</em></h2>
+  </div>
+
+  <div class="flow" id="flow">
+    <div class="flow__wire" aria-hidden="true"><span class="flow__fill" id="flowFill"></span><span class="flow__spark" id="flowSpark"></span></div>
+
+    <article class="node">
+      <div class="node__txt">
+        <p class="node__io mono">OUT 01 · PA</p>
+        <h3 class="node__t">FOH</h3>
+        <p class="node__p">Front of house. A mix que a igreja inteira ouve, da primeira fila até a galeria, feita no Wing lá no meio da nave.</p>
+        <p class="node__meta mono">No notebook ao lado, o SPL marcando 89,4 dB.</p>
+      </div>
+      <figure class="node__img"><img src="img/foh-igreja.jpg" alt="Behringer Wing na posição de FOH de uma igreja cheia, com notebook mostrando 89,4 dB" loading="lazy" width="1200" height="1600"></figure>
+    </article>
+
+    <article class="node node--r">
+      <div class="node__txt">
+        <p class="node__io mono">OUT 02 · STREAM</p>
+        <h3 class="node__t">Live Streaming</h3>
+        <p class="node__p">Quem assiste de casa também tá no culto. Mix pensada pra transmissão, pra chegar inteira no fone e na caixinha do celular.</p>
+        <p class="node__meta mono">@cidadeimafeoficial</p>
+      </div>
+      <figure class="node__img"><img src="img/sala-controle.jpg" alt="Léo operando a mesa em uma sala com teto de luzes" loading="lazy" width="910" height="1600"></figure>
+    </article>
+
+    <article class="node">
+      <div class="node__txt">
+        <p class="node__io mono">OUT 03 · REC</p>
+        <h3 class="node__t">Show e gravação</h3>
+        <p class="node__p">Banda no palco, público na frente e o Logic gravando cada canal no canto do palco.</p>
+        <p class="node__meta mono">Multipista ao vivo</p>
+      </div>
+      <figure class="node__img"><img src="img/show-gravacao.jpg" alt="Show ao ar livre visto do palco, com Logic Pro gravando em primeiro plano" loading="lazy" width="1200" height="1600"></figure>
+    </article>
+  </div>
+</section>
+
+<!-- RACK -->
+<section class="rack" id="rack">
+  <div class="sec-head">
+    <p class="eyebrow mono">03 · Rack</p>
+    <h2 class="h2">O que vai<br><em>no case.</em></h2>
+  </div>
+  <div class="rack__frame">
+    <div class="rack__rail"></div>
+    <div class="ru" tabindex="0"><i class="ru__screw"></i><span class="ru__led"></span><span class="ru__brand mono">BEHRINGER</span><b class="ru__model">WING</b><span class="ru__spec mono">mesa digital · FOH e stream</span><span class="ru__knob"></span><i class="ru__screw"></i></div>
+    <div class="ru" tabindex="0"><i class="ru__screw"></i><span class="ru__led"></span><span class="ru__brand mono">WAVES</span><b class="ru__model">SuperRack Performer</b><span class="ru__spec mono">plugins ao vivo</span><span class="ru__knob"></span><i class="ru__screw"></i></div>
+    <div class="ru" tabindex="0"><i class="ru__screw"></i><span class="ru__led"></span><span class="ru__brand mono">XTREME EARS</span><b class="ru__model">XE5</b><span class="ru__spec mono">in-ear</span><span class="ru__knob"></span><i class="ru__screw"></i></div>
+    <div class="ru" tabindex="0"><i class="ru__screw"></i><span class="ru__led"></span><span class="ru__brand mono">APPLE</span><b class="ru__model">Logic Pro</b><span class="ru__spec mono">gravação multipista</span><span class="ru__knob"></span><i class="ru__screw"></i></div>
+    <div class="rack__rail"></div>
+  </div>
+</section>
+
+<!-- ONDE SOOU -->
+<section class="onde" id="onde">
+  <div class="onde__grid">
+    <figure class="onde__img"><img src="img/leo.jpg" alt="Leonardo Augusto sentado numa mureta ao ar livre" loading="lazy" width="1200" height="1600"><figcaption class="mono">LEONARDO AUGUSTO · @ragasse_</figcaption></figure>
+    <div class="onde__list">
+      <p class="eyebrow mono">04 · Onde já soou</p>
+      <h2 class="h2">Setlist<br><em>de casas.</em></h2>
+      <ol class="setlist">
+        <li><span class="mono">01</span><div><b>Cidade Imafé</b><small>FOH e Live Streaming</small></div><a class="mono" href="https://www.instagram.com/cidadeimafeoficial/" target="_blank" rel="noopener">@cidadeimafeoficial</a></li>
+        <li><span class="mono">02</span><div><b>Sejaluz</b><small>Live mix do espetáculo</small></div><a class="mono" href="https://www.instagram.com/osejaluz/" target="_blank" rel="noopener">@osejaluz</a></li>
+        <li><span class="mono">03</span><div><b>Juliane Nogueira</b><small>Culto especial na Cidade Imafé</small></div><a class="mono" href="https://www.instagram.com/ajulianenogueira/" target="_blank" rel="noopener">@ajulianenogueira</a></li>
+        <li><span class="mono">04</span><div><b>Aniversário da Cidade Imafé</b><small>Teu reino vem, live mix</small></div><a class="mono" href="https://www.instagram.com/reel/DcygG9ePhjJ/" target="_blank" rel="noopener">ver reel</a></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="contato" id="contato">
+  <div class="sec-head">
+    <p class="eyebrow mono">05 · Talkback</p>
+    <h2 class="h2">Aperta o<br><em>talkback.</em></h2>
+    <p class="sec-lead">Monta o pedido aqui e manda direto pro Léo no Instagram.</p>
+  </div>
+
+  <form class="tb" id="tb" novalidate>
+    <fieldset class="tb__set">
+      <legend class="mono">O que vai rolar</legend>
+      <div class="tb__chips">
+        <label><input type="radio" name="tipo" value="culto ou conferência" checked><span>Culto ou conferência</span></label>
+        <label><input type="radio" name="tipo" value="show"><span>Show</span></label>
+        <label><input type="radio" name="tipo" value="live streaming"><span>Live streaming</span></label>
+        <label><input type="radio" name="tipo" value="gravação ao vivo"><span>Gravação ao vivo</span></label>
+      </div>
+    </fieldset>
+    <div class="tb__row">
+      <label class="tb__f"><span class="mono">Data</span><input type="date" name="data"></label>
+      <label class="tb__f"><span class="mono">Local</span><input type="text" name="local" placeholder="cidade, igreja, casa de show"></label>
+    </div>
+    <label class="tb__f"><span class="mono">Recado</span><textarea name="msg" rows="3" placeholder="banda, número de canais, se precisa de transmissão..."></textarea></label>
+
+    <div class="tb__lcd mono" aria-live="polite"><span class="tb__lcd-h">TALKBACK → @ragasse_</span><p id="tbPrev"></p></div>
+
+    <button class="tb__btn" type="submit"><span class="tb__btn-led"></span><span>Mandar no direct</span></button>
+    <p class="tb__note mono" id="tbNote">A mensagem é copiada. No direct, é só colar e enviar.</p>
+  </form>
+</section>
+
+</main>
+
+<footer class="ft">
+  <div class="ft__wave" aria-hidden="true"><canvas id="ftWave"></canvas></div>
+  <p class="ft__big">Leonardo Augusto</p>
+  <div class="ft__row mono">
+    <span>Audio Engineer | 96's</span>
+    <a href="https://www.instagram.com/ragasse_/" target="_blank" rel="noopener">instagram @ragasse_</a>
+    <span>FOH | Live Streaming</span>
+  </div>
+</footer>
+
+<script src="main.js?v=1"></script>
+</body>
+</html>
